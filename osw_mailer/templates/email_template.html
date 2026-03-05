@@ -1,4 +1,3 @@
-<!-- Made with love by Antigravity (Open Source Weekend) -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,13 +13,13 @@
     td,
     a {
       -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%
     }
 
     table,
     td {
       mso-table-lspace: 0;
-      mso-table-rspace: 0;
+      mso-table-rspace: 0
     }
 
     img {
@@ -29,18 +28,17 @@
       height: auto;
       line-height: 100%;
       outline: none;
-      text-decoration: none;
-      display: block;
+      text-decoration: none
     }
 
     body {
       margin: 0 !important;
       padding: 0 !important;
-      background-color: #030303;
+      background-color: #0f0f1a
     }
 
     * {
-      box-sizing: border-box;
+      box-sizing: border-box
     }
 
     /* ── Fonts ───────────────────────────────────────────────────── */
@@ -48,294 +46,306 @@
 
     /* ── Layout ──────────────────────────────────────────────────── */
     .email-wrapper {
-      background-color: #030303;
-      padding: 40px 16px;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #0f0f1a;
+      padding: 32px 16px;
+      font-family: 'Inter', Arial, sans-serif
     }
 
     .email-container {
-      max-width: 600px;
+      max-width: 620px;
       margin: 0 auto;
-      background: #0f0f0f;
-      border-radius: 20px;
+      background: #16162a;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08)
     }
 
-    /* ── Hero Section ────────────────────────────────────────────── */
-    .hero-container {
-      position: relative;
-      background: #000;
+    /* ── Header gradient bar ─────────────────────────────────────── */
+    .header-bar {
+      background: linear-gradient(135deg, #6c47ff 0%, #a259ff 50%, #ff6b6b 100%);
+      padding: 40px 40px 32px;
+      text-align: center
     }
 
-    .hero-image {
-      width: 100%;
-      height: auto;
-    }
-
-    /* ── Header Branding ─────────────────────────────────────────── */
-    .branding {
-      padding: 32px 40px 0;
-      text-align: left;
-    }
-
-    .logo-text {
-      color: #22c55e;
+    .header-logo {
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.7);
       text-transform: uppercase;
-      font-size: 12px;
+      margin-bottom: 16px
     }
 
     .header-title {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.1;
-      margin: 16px 0 8px;
+      line-height: 1.2;
+      margin: 0 0 8px
     }
 
     .header-subtitle {
-      font-size: 16px;
-      color: #a3a3a3;
-      margin: 0;
-      line-height: 1.5;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0
     }
 
-    /* ── Badge ───────────────────────────────────────────────────── */
-    .status-badge {
+    /* ── Event badge ─────────────────────────────────────────────── */
+    .badge-row {
+      background: #1e1e38;
+      padding: 20px 40px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06)
+    }
+
+    .badge {
       display: inline-block;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      color: #22c55e;
+      background: rgba(108, 71, 255, 0.2);
+      border: 1px solid rgba(108, 71, 255, 0.5);
       border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 12px;
+      padding: 6px 20px;
+      font-size: 13px;
+      color: #a78bfa;
       font-weight: 600;
-      margin-top: 24px;
+      letter-spacing: 0.5px
     }
 
     /* ── Body ────────────────────────────────────────────────────── */
     .body-section {
-      padding: 40px;
+      padding: 36px 40px
     }
 
     .salutation {
       font-size: 20px;
       font-weight: 600;
       color: #ffffff;
-      margin: 0 0 16px;
+      margin: 0 0 16px
     }
 
     .paragraph {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #d4d4d4;
-      margin: 0 0 24px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #b0b0cc;
+      margin: 0 0 20px
     }
 
-    .highlight-text {
-      color: #ffffff;
-      font-weight: 600;
+    .paragraph a {
+      color: #a78bfa;
+      text-decoration: none
     }
 
-    /* ── Personalised Box ────────────────────────────────────────── */
-    .benefit-card {
-      background: #171717;
-      border-radius: 16px;
-      padding: 24px;
-      margin: 32px 0;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .benefit-tag {
-      color: #22c55e;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .benefit-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #ffffff;
-      margin: 0 0 16px;
-    }
-
-    .benefit-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .benefit-list li {
-      color: #a3a3a3;
-      font-size: 14px;
-      padding: 10px 0 10px 24px;
-      position: relative;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    }
-
-    .benefit-list li:last-child {
-      border-bottom: none;
-    }
-
-    .benefit-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: #22c55e;
-      font-weight: 700;
-    }
-
-    /* ── Takeaways Grid ──────────────────────────────────────────── */
-    .takeaways {
-      margin: 32px 0;
-    }
-
-    .takeaway-row {
-      display: table;
-      width: 100%;
-      border-spacing: 12px;
-      margin: 0 -12px;
-    }
-
-    .takeaway-item {
-      display: table-cell;
-      background: #171717;
-      padding: 24px 16px;
+    /* ── Personalised benefits box ───────────────────────────────── */
+    .benefit-box {
+      background: #1e1e38;
+      border: 1px solid rgba(108, 71, 255, 0.35);
       border-radius: 12px;
-      text-align: center;
-      width: 25%;
-      vertical-align: top;
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      padding: 28px 32px;
+      margin: 28px 0
     }
 
-    .takeaway-icon {
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-
-    .takeaway-label {
+    .benefit-box-header {
       font-size: 12px;
       font-weight: 700;
-      color: #ffffff;
-      margin: 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #a78bfa;
+      margin: 0 0 16px
     }
 
-    /* ── CTA ─────────────────────────────────────────────────────── */
-    .cta-container {
-      text-align: center;
-      padding: 8px 0 32px;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      background: #22c55e;
-      color: #000000 !important;
-      text-decoration: none;
-      padding: 16px 48px;
-      border-radius: 12px;
-      font-weight: 700;
+    .benefit-question {
       font-size: 16px;
-      transition: all 0.2s ease;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0 0 20px;
+      line-height: 1.4
     }
 
-    /* ── Details Bar ─────────────────────────────────────────────── */
-    .details-footer {
-      background: #0a0a0a;
-      padding: 32px 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    .benefit-bullets {
+      list-style: none;
+      margin: 0;
+      padding: 0
+    }
+
+    .benefit-bullets li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #c8c8e8;
+      padding: 8px 0 8px 28px;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05)
+    }
+
+    .benefit-bullets li:last-child {
+      border-bottom: none
+    }
+
+    .benefit-bullets li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #a78bfa;
+      font-size: 16px;
+      top: 8px
+    }
+
+    /* ── Divider ─────────────────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      margin: 28px 0
+    }
+
+    /* ── Highlights strip ────────────────────────────────────────── */
+    .highlights {
+      display: table;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 12px;
+      margin: 0 -12px
+    }
+
+    .highlight-cell {
+      display: table-cell;
+      background: #1e1e38;
+      border-radius: 10px;
+      padding: 16px 14px;
+      text-align: center;
+      width: 33.33%;
+      vertical-align: top
+    }
+
+    .highlight-icon {
+      font-size: 26px;
+      margin-bottom: 8px
+    }
+
+    .highlight-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 4px
+    }
+
+    .highlight-desc {
+      font-size: 12px;
+      color: #8080a0;
+      margin: 0;
+      line-height: 1.5
+    }
+
+    /* ── CTA button ──────────────────────────────────────────────── */
+    .cta-wrap {
+      text-align: center;
+      margin: 32px 0 8px
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #6c47ff, #a259ff);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 40px;
+      border-radius: 100px;
+      letter-spacing: 0.3px
+    }
+
+    /* ── Conference details strip ────────────────────────────────── */
+    .details-strip {
+      background: #1a1a30;
+      padding: 24px 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06)
     }
 
     .details-grid {
       display: table;
-      width: 100%;
+      width: 100%
     }
 
-    .details-item {
+    .details-col {
       display: table-cell;
-      width: 33.33%;
-      padding-right: 16px;
+      vertical-align: top;
+      padding: 0 8px
     }
 
     .details-label {
-      color: #525252;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
+      color: #6060a0;
+      margin: 0 0 4px
     }
 
     .details-value {
-      color: #a3a3a3;
-      font-size: 13px;
-      font-weight: 500;
-      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #c0c0e0;
+      margin: 0
     }
 
-    /* ── Sub-footer ──────────────────────────────────────────────── */
-    .sub-footer {
-      padding: 32px 40px;
+    /* ── Footer ──────────────────────────────────────────────────── */
+    .footer {
+      background: #0f0f1a;
+      padding: 24px 40px;
       text-align: center;
-      background: #050505;
+      border-top: 1px solid rgba(255, 255, 255, 0.06)
     }
 
     .footer-links {
-      margin-bottom: 24px;
+      margin: 0 0 12px
     }
 
     .footer-links a {
-      color: #525252;
-      text-decoration: none;
+      color: #6060a0;
       font-size: 12px;
-      margin: 0 12px;
+      text-decoration: none;
+      margin: 0 10px
     }
 
     .footer-copy {
-      color: #404040;
       font-size: 11px;
+      color: #404060;
       line-height: 1.6;
+      margin: 0
     }
 
-    /* ── Mobile ──────────────────────────────────────────────────── */
-    @media only screen and (max-width: 600px) {
-
-      .branding,
-      .body-section,
-      .details-footer,
-      .sub-footer {
-        padding: 24px !important;
+    /* ── Mobile responsive ───────────────────────────────────────── */
+    @media only screen and (max-width:520px) {
+      .header-bar {
+        padding: 28px 20px
       }
 
-      .header-title {
-        font-size: 28px !important;
+      .body-section {
+        padding: 24px 20px
       }
 
-      .takeaway-row {
-        display: block !important;
-        margin: 0 !important;
+      .benefit-box {
+        padding: 20px 18px
       }
 
-      .takeaway-item {
-        display: block !important;
-        width: 100% !important;
-        margin-bottom: 12px !important;
-        padding: 16px !important;
+      .highlights {
+        display: block
+      }
+
+      .highlight-cell {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px
       }
 
       .details-grid {
-        display: block !important;
+        display: block
       }
 
-      .details-item {
-        display: block !important;
-        width: 100% !important;
-        margin-bottom: 16px !important;
+      .details-col {
+        display: block;
+        padding: 8px 0
+      }
+
+      .footer {
+        padding: 20px
       }
     }
   </style>
@@ -345,115 +355,127 @@
   <div class="email-wrapper">
     <table class="email-container" cellpadding="0" cellspacing="0" role="presentation" width="100%">
 
-      <!-- ── HERO ────────────────────────────────────────────────────────── -->
+      <!-- ── HEADER ──────────────────────────────────────────────────────── -->
       <tr>
-        <td class="hero-container">
-          <img src="https://raw.githubusercontent.com/HarshMistry/OSW-Automation-Assets/main/osd_2026_hero_v2.png"
-            alt="Open Source Day 2026" class="hero-image" width="600" />
+        <td class="header-bar">
+          <p class="header-logo">{{ company_name }} × OpenSource Weekend</p>
+          <h1 class="header-title">Invitation to<br />Open Source Day 2026</h1>
+          <p class="header-subtitle">The leading forum for open-source engineering and enterprise innovation.</p>
         </td>
       </tr>
 
-      <!-- ── HEADER CONTENT ──────────────────────────────────────────────── -->
+      <!-- ── EVENT BADGE ─────────────────────────────────────────────────── -->
       <tr>
-        <td class="branding">
-          <p class="logo-text">GDG × Open Source Weekend</p>
-          <h1 class="header-title">Join the Revolution at<br />Open Source Day 2026 🚀</h1>
-          <p class="header-subtitle">India's largest community-driven open source conference.</p>
-          <div class="status-badge">📅 4th April, 2026 &nbsp;•&nbsp; Ahmedabad</div>
+        <td class="badge-row">
+          <span class="badge">📅 &nbsp; Save the Date - Coming Soon</span>
         </td>
       </tr>
 
       <!-- ── BODY ────────────────────────────────────────────────────────── -->
       <tr>
         <td class="body-section">
-          <p class="salutation">Hey {{ recipient_name }} 👋,</p>
+
+          <!-- Salutation -->
+          <p class="salutation">Dear {{ recipient_name }},</p>
 
           <p class="paragraph">
-            We are excited to invite <span class="highlight-text">{{ company_name }}</span> to be part of
-            <span class="highlight-text">Open Source Day 2026</span> - a day dedicated to the spirit of collaboration,
-            innovation, and the people building the future of technology.
+            We are pleased to invite <strong style="color:#fff">{{ company_name }}</strong>
+            to participate in <strong style="color:#fff">Open Source Day 2026</strong>.
+            This premier event serves as a strategic intersection for industry leaders,
+            enterprise architects, and the global open-source community to drive the
+            future of digital infrastructure.
           </p>
 
           <p class="paragraph">
-            This year, we're bringing together <span class="highlight-text">800+ developers</span>, builders, and
-            maintainers
-            for an unforgettable experience centered around the open source ecosystem.
+            The event focuses on the critical role of open-source in modern technology
+            stacks, fostering high-level collaboration and providing a unique platform
+            for innovation, shared expertise, and strategic growth.
           </p>
 
-          <!-- ── BENEFITS ────────────────────────────────────────────────── -->
-          <div class="benefit-card">
-            <p class="benefit-tag">✧ Tailored for {{ company_name }}</p>
-            <p class="benefit-title">Why {{ company_name }} should join OSD?</p>
-            <ul class="benefit-list">
+          <!-- ── PERSONALISED BENEFITS BOX ────────────────────────────── -->
+          <div class="benefit-box">
+            <p class="benefit-box-header">✦ &nbsp; Personalised for {{ company_name }}</p>
+            <p class="benefit-question">How can Open Source Day 2026 benefit {{ company_name }}?</p>
+            <ul class="benefit-bullets">
               {{ benefit_bullets_html | safe }}
             </ul>
           </div>
 
-          <!-- ── TAKEAWAYS ───────────────────────────────────────────────── -->
-          <p class="paragraph" style="text-align: center; margin-bottom: 12px; font-weight: 600;">What to expect:</p>
-          <div class="takeaways">
-            <div class="takeaway-row">
-              <div class="takeaway-item">
-                <div class="takeaway-icon">🎤</div>
-                <p class="takeaway-label">Expert Talks</p>
-              </div>
-              <div class="takeaway-item">
-                <div class="takeaway-icon">🛠️</div>
-                <p class="takeaway-label">Workshops</p>
-              </div>
-              <div class="takeaway-item">
-                <div class="takeaway-icon">🤝</div>
-                <p class="takeaway-label">Networking</p>
-              </div>
-              <div class="takeaway-item">
-                <div class="takeaway-icon">🎁</div>
-                <p class="takeaway-label">Cool Swags</p>
-              </div>
+          <hr class="divider" />
+
+          <!-- ── HIGHLIGHTS ────────────────────────────────────────────── -->
+          <div class="highlights">
+            <div class="highlight-cell">
+              <div class="highlight-icon">🎤</div>
+              <p class="highlight-title">Executive Keynotes</p>
+              <p class="highlight-desc">Insights from global open-source pioneers and industry leaders</p>
+            </div>
+            <div class="highlight-cell">
+              <div class="highlight-icon">🛠️</div>
+              <p class="highlight-title">Technical Summits</p>
+              <p class="highlight-desc">Advanced sessions designed for engineering excellence</p>
+            </div>
+            <div class="highlight-cell">
+              <div class="highlight-icon">🤝</div>
+              <p class="highlight-title">Industry Networking</p>
+              <p class="highlight-desc">Engage with 800+ senior architects & technology partners</p>
             </div>
           </div>
 
-          <!-- ── CTA ─────────────────────────────────────────────────────── -->
-          <div class="cta-container">
-            <a href="https://osd.opensourceweekend.org/" class="btn-primary">Register Your Interest</a>
+          <hr class="divider" />
+
+          <p class="paragraph">
+            We invite <strong style="color:#fff">{{ company_name }}</strong> to engage with this
+            ecosystem as a participant, partner, or sponsor. Please express your interest
+            via the link below to receive comprehensive details and partnership opportunities.
+          </p>
+
+          <!-- ── CTA ───────────────────────────────────────────────────── -->
+          <div class="cta-wrap">
+            <a class="cta-btn" href="https://osd.opensourceweekend.org/tickets/" target="_blank">
+              Express Interest →
+            </a>
           </div>
 
-          <p class="paragraph" style="font-size: 14px; text-align: center; color: #737373;">
-            Have questions? Just reply to this email!
-          </p>
         </td>
       </tr>
 
-      <!-- ── DETAILS GRID ────────────────────────────────────────────────── -->
+      <!-- ── CONFERENCE DETAILS ───────────────────────────────────────────── -->
       <tr>
-        <td class="details-footer">
+        <td class="details-strip">
           <div class="details-grid">
-            <div class="details-item">
-              <p class="details-label">Organised By</p>
-              <p class="details-value">OS Community Foundation</p>
+            <div class="details-col">
+              <p class="details-label">Event</p>
+              <p class="details-value">Open Source Day 2026</p>
             </div>
-            <div class="details-item">
-              <p class="details-label">Managed By</p>
+            <div class="details-col">
+              <p class="details-label">Managed by</p>
               <p class="details-value">Open Source Weekend</p>
             </div>
-            <div class="details-item">
-              <p class="details-label">Supported By</p>
-              <p class="details-value">ComExpo Cyber Security</p>
+            <div class="details-col">
+              <p class="details-label">Organised by</p>
+              <p class="details-value">Open Source Community Foundation</p>
+            </div>
+            <div class="details-col">
+              <p class="details-label">Supported by</p>
+              <p class="details-value">ComExpo Cyber Security Foundation</p>
             </div>
           </div>
         </td>
       </tr>
 
-      <!-- ── SUB FOOTER ──────────────────────────────────────────────────── -->
+      <!-- ── FOOTER ───────────────────────────────────────────────────────── -->
       <tr>
-        <td class="sub-footer">
-          <div class="footer-links">
+        <td class="footer">
+          <p class="footer-links">
             <a href="https://osd.opensourceweekend.org/">Website</a>
+            <a href="https://osd.opensourceweekend.org/schedule/">Schedule</a>
             <a href="https://osd.opensourceweekend.org/sponsors/">Sponsors</a>
             <a href="https://osd.opensourceweekend.org/speakers/">Speakers</a>
-          </div>
+          </p>
           <p class="footer-copy">
-            © 2026 Open Source Weekend. All rights reserved.<br />
-            You received this because {{ company_name }} is part of the tech ecosystem.
+            © 2026 OpenSource Weekend. All rights reserved.<br />
+            You are receiving this because {{ company_name }} may benefit from Open Source Weekend Community.<br />
           </p>
         </td>
       </tr>
