@@ -3,7 +3,7 @@
 OSW Email Automation — Groq LLM Personalizer
 =============================================
 Generates up to 5 concise, recipient-tailored bullet points answering:
-  "How can the OpenSource Weekend Conference benefit you?"
+  "How can the Open Source Day 2026 benefit you?"
 
 Uses tenacity for automatic retry + exponential back-off on transient failures.
 """
@@ -58,7 +58,7 @@ def _build_system_prompt() -> str:
     return (
         "You are a sharp, persuasive copywriter crafting tailored event outreach.\n"
         "Your task: write exactly 5 bullet points (each starting with '•') explaining "
-        "how the OpenSource Weekend (OSW) Conference benefits the recipient's specific "
+        "how the Open Source Day 2026 benefits the recipient's specific "
         "organization type.\n\n"
         "Rules:\n"
         "- Maximum 5 bullets. Never fewer.\n"
@@ -80,16 +80,14 @@ def _build_user_prompt(recipient: "Recipient") -> str:
         f"Recipient name: {recipient.name}",
         f"Organization: {recipient.company_name} ({audience_hint})",
     ]
-    if recipient.industry:
-        parts.append(f"Industry / sector: {recipient.industry}")
-    if recipient.city and recipient.state:
-        parts.append(f"Location: {recipient.city}, {recipient.state}")
-    if recipient.capacity:
-        parts.append(f"Organization size / capacity: {recipient.capacity}")
+    if recipient.city:
+        parts.append(f"Location: {recipient.city}")
+    if recipient.context:
+        parts.append(f"Company Context / About: {recipient.context}")
 
     parts.append(
         "\nQuestion to answer: "
-        "\"How can the OpenSource Weekend Conference benefit your organization?\""
+        "\"How can the Open Source Day 2026 benefit your organization?\""
     )
     return "\n".join(parts)
 
@@ -159,6 +157,22 @@ def _clean_bullets(raw: str) -> str:
     return "\n".join(lines[:5])
 
 
+# ── Fallback bullets (when context is missing) ───────────────────────────────
+
+FALLBACK_BENEFITS = (
+    "• Access to Top Developer Talent – Meet skilled developers, open-source contributors, "
+    "and tech enthusiasts in one place.\n"
+    "• Strong Community Visibility – Showcase your company to an engaged tech community "
+    "and increase brand recognition.\n"
+    "• Networking with Industry Leaders – Connect with founders, CTOs, and technology leaders "
+    "from multiple communities.\n"
+    "• Innovation & Open Source Collaboration – Discover emerging technologies and collaborate "
+    "with open-source innovators.\n"
+    "• Be Part of a Proven Tech Movement – Join an event backed by a strong ecosystem "
+    "of communities and industry supporters."
+)
+
+
 # ── Batch personalizer ────────────────────────────────────────────────────────
 
 async def personalise_all(
@@ -175,6 +189,10 @@ async def personalise_all(
 
     async def _personalise(r: "Recipient") -> None:
         async with sem:
+            if not r.context:
+                r.llm_benefit_bullets = FALLBACK_BENEFITS
+                return
+
             try:
                 r.llm_benefit_bullets = await generate_benefit_bullets(r)
             except Exception as exc:  # noqa: BLE001
@@ -182,13 +200,7 @@ async def personalise_all(
                     "LLM personalisation failed for %s (%s): %s",
                     r.email, r.company_name, exc,
                 )
-                r.llm_benefit_bullets = (
-                    "• Networking with 500+ open-source practitioners\n"
-                    "• Hands-on workshops led by industry experts\n"
-                    "• Exposure to cutting-edge open-source projects\n"
-                    "• Career & collaboration opportunities\n"
-                    "• Insights into the latest developer tools & trends"
-                )
+                r.llm_benefit_bullets = FALLBACK_BENEFITS
 
     tasks = [_personalise(r) for r in recipients]
     await asyncio.gather(*tasks)

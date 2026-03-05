@@ -125,18 +125,17 @@ async def run(args: argparse.Namespace) -> None:
 
         async def _personalise_tracked(r) -> None:
             async with sem:
-                from osw_mailer.personalizer import generate_benefit_bullets
+                from osw_mailer.personalizer import generate_benefit_bullets, FALLBACK_BENEFITS
+                if not getattr(r, "context", None):
+                    r.llm_benefit_bullets = FALLBACK_BENEFITS
+                    progress.advance(task)
+                    return
+
                 try:
                     r.llm_benefit_bullets = await generate_benefit_bullets(r)
                 except Exception as exc:  # noqa: BLE001
                     log.error("LLM failed for %s: %s", r.email, exc)
-                    r.llm_benefit_bullets = (
-                        "• Networking with 500+ open-source practitioners\n"
-                        "• Hands-on workshops led by industry experts\n"
-                        "• Exposure to cutting-edge open-source projects\n"
-                        "• Career & collaboration opportunities\n"
-                        "• Insights into the latest developer tools & trends"
-                    )
+                    r.llm_benefit_bullets = FALLBACK_BENEFITS
                 finally:
                     progress.advance(task)
 

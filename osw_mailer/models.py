@@ -39,9 +39,7 @@ class Recipient:
     company_name: str
     company_type: str          # corporate | startup | community | student | individual
     city: str = ""
-    state: str = ""
-    capacity: Optional[str] = None
-    industry: str = ""
+    context: str = ""
 
     # Populated by personalizer
     llm_benefit_bullets: str = field(default="", repr=False)
@@ -65,9 +63,7 @@ class Recipient:
             "company_name": self.company_name,
             "company_type": self.company_type,
             "city": self.city,
-            "state": self.state,
-            "capacity": self.capacity,
-            "industry": self.industry,
+            "context": self.context,
         }
 
 
@@ -88,13 +84,7 @@ _ALIASES: dict[str, str] = {
     "type": "company_type",
     "category": "company_type",
     "city": "city",
-    "state": "state",
-    "province": "state",
-    "capacity": "capacity",
-    "company_capacity": "capacity",
-    "size": "capacity",
-    "industry": "industry",
-    "sector": "industry",
+    "context": "context",
 }
 
 _REQUIRED_FIELDS = {"email", "name", "company_name", "company_type"}
@@ -178,9 +168,7 @@ def load_recipients(csv_path: str | Path, limit: int | None = None) -> list[Reci
             company_name=company_name,
             company_type=company_type,
             city=row.get("city", ""),
-            state=row.get("state", ""),
-            capacity=row.get("capacity") or None,
-            industry=row.get("industry", ""),
+            context=row.get("context", ""),
         )
         recipients.append(r)
 
