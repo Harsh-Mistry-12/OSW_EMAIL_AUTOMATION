@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSW Email Automation Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i data-lucide="mail" class="logo-icon"></i>
+                <h1>OSW <span>Mailer</span></h1>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-section="csv-section">
+                    <i data-lucide="file-spread-sheet"></i> CSV Upload
+                </button>
+                <button class="nav-btn" data-section="template-section">
+                    <i data-lucide="layout-template"></i> Templates
+                </button>
+                <button class="nav-btn" data-section="preview-section">
+                    <i data-lucide="eye"></i> Preview
+                </button>
+                <button class="nav-btn" data-section="sending-section">
+                    <i data-lucide="send"></i> Dispatch
+                </button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- CSV Section -->
+            <section id="csv-section" class="content-section active">
+                <div class="card glass">
+                    <div class="card-header">
+                        <h2><i data-lucide="upload-cloud"></i> Upload Recipients</h2>
+                        <a href="/api/sample-csv" class="btn btn-secondary">
+                            <i data-lucide="download"></i> Download Sample CSV
+                        </a>
+                    </div>
+                    <div class="drop-zone" id="csv-drop-zone">
+                        <i data-lucide="file-up" class="drop-icon"></i>
+                        <p>Drag & drop your CSV file here or <span>browse</span></p>
+                        <input type="file" id="csv-input" accept=".csv" hidden>
+                    </div>
+                    <div id="csv-preview-container" class="hidden">
+                        <h3>Data Preview</h3>
+                        <div class="table-wrapper">
+                            <table id="csv-preview-table"></table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Template Section -->
+            <section id="template-section" class="content-section">
+                <div class="template-grid">
+                    <div class="card glass template-list-card">
+                        <div class="card-header">
+                            <h2><i data-lucide="list"></i> My Templates</h2>
+                            <button id="add-template-btn" class="btn btn-primary btn-sm">
+                                <i data-lucide="plus"></i> New
+                            </button>
+                        </div>
+                        <div id="template-list" class="template-list">
+                            <!-- Templates loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="card glass template-editor-card">
+                        <div class="card-header">
+                            <h2 id="editor-title">Editor</h2>
+                            <div class="editor-actions">
+                                <button id="save-template-btn" class="btn btn-primary">
+                                    <i data-lucide="save"></i> Save Template
+                                </button>
+                            </div>
+                        </div>
+                        <div class="editor-container">
+                            <textarea id="template-editor" spellcheck="false"
+                                placeholder="Paste your HTML template code here..."></textarea>
+                            <div id="placeholder-info" class="placeholder-info">
+                                <h4>Dynamic Fields Detected:</h4>
+                                <div id="placeholder-tags"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section id="preview-section" class="content-section">
+                <div class="preview-layout">
+                    <div class="card glass preview-controls">
+                        <h2><i data-lucide="settings"></i> Preview Data</h2>
+                        <div id="preview-data-inputs" class="data-inputs">
+                            <!-- Dynamic inputs based on placeholders -->
+                        </div>
+                        <button id="refresh-preview-btn" class="btn btn-primary btn-block">
+                            <i data-lucide="refresh-cw"></i> Refresh Preview
+                        </button>
+                    </div>
+                    <div class="card glass preview-display">
+                        <div class="preview-header">
+                            <h2><i data-lucide="monitor"></i> Rendering</h2>
+                            <div class="preview-modes">
+                                <button class="mode-btn active" title="Desktop"><i data-lucide="monitor"></i></button>
+                                <button class="mode-btn" title="Mobile"><i data-lucide="smartphone"></i></button>
+                            </div>
+                        </div>
+                        <div id="email-preview-frame-container" class="frame-container">
+                            <iframe id="email-preview-frame"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dispatch Section -->
+            <section id="sending-section" class="content-section">
+                <div class="card glass">
+                    <h2><i data-lucide="rocket"></i> Start Campaign</h2>
+                    <p class="section-desc">Review your settings and click launch to begin the automation process.</p>
+                    <div class="summary-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Recipients Loaded</span>
+                            <span id="summary-recipients" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Selected Template</span>
+                            <span id="summary-template" class="stat-value">None</span>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button id="launch-btn" class="btn btn-large btn-glow">
+                            <i data-lucide="send"></i> Launch Campaign
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast">Successfully saved!</div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

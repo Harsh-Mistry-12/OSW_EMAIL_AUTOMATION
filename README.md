@@ -16,8 +16,8 @@ Built with Python · Groq LLM · Async SMTP · Rich Terminal Dashboard
 6. [Configuration (.env)](#configuration-env)
 7. [Usage & CLI Reference](#usage--cli-reference)
 8. [Workflow Explained](#workflow-explained)
-9. [Email Open Tracking](#email-open-tracking)
-10. [Email Template Preview](#email-template-preview)
+9. [Premium Web Dashboard](#premium-web-dashboard)
+10. [Email Open Tracking](#email-open-tracking)
 11. [Error Handling & Retry Policy](#error-handling--retry-policy)
 12. [Logging & Monitoring](#logging--monitoring)
 13. [Security & Compliance](#security--compliance)
@@ -143,6 +143,9 @@ OSW_EMAIL_AUTOMATION/
 │   └── templates/
 │       └── email_template.html    # Static HTML email template
 │
+├── static/                        # Dashboard assets (CSS, JS, icons)
+├── automation_data/               # Data and uploads directory
+├── web_server.py                  # Premium FastAPI Web Dashboard
 └── logs/                          # Auto-created at runtime
     ├── run_<timestamp>.jsonl      # General application logs
     └── send_events_<timestamp>.jsonl  # Structured send-event records
@@ -309,45 +312,55 @@ The `rich` dashboard displays a metrics panel and last-20-records table.
 
 ---
 
+---
+
+## Premium Web Dashboard
+
+The OSW Email Automation system now includes a high-performance, premium web-based control panel for managing your campaigns visually.
+
+### 🌟 Key Features
+- **CSV Data Hub**: Upload recipient lists via drag-and-drop, preview parsed data, and download sample templates.
+- **Template Laboratory**: Create, edit, and save HTML templates with real-time placeholder detection.
+- **Visual Preview Engine**: Render emails with sample data to verify styling and dynamic content before sending.
+- **Integrated Tracker**: The web dashboard automatically serves the tracking pixels and records open events.
+
+### 🚀 Launching the Dashboard
+
+1. **Start the Web Server**:
+   ```bash
+   python web_server.py
+   ```
+2. **Access the Interface**:
+   Open **[http://localhost:8001](http://localhost:8001)** in your browser.
+
+---
+
 ## Email Open Tracking
 
-OSW Email Automation includes a built-in tracking system to see who opens your emails. It uses an invisible tracking pixel and a lightweight web server.
+The tracking system is now integrated directly into the **Premium Web Dashboard**, but still works as a standalone logging engine.
 
 ### 1. How it Works
 1.  **Unique IDs**: Every recipient is assigned a unique `tracking_id` when the CSV is loaded.
 2.  **Tracking Pixel**: An invisible `1x1` image tag is injected into the bottom of every email:
     `<img src="http://your-server.com/t/UNIQUE_ID" ... />`
-3.  **Tracker Server**: A dedicated FastAPI server (`tracker_server.py`) listens for requests. When an image is requested, it logs the recipient's email, name, IP, and timestamp.
+3.  **Tracker (Integrated)**: The `web_server.py` listens for these pixel hits and logs the recipient's details.
 
 ### 2. Setup & Configuration
 
-**Install tracking dependencies:**
+**Install requirements:**
 ```bash
-pip install fastapi "uvicorn[standard]"
+pip install -r requirements.txt
 ```
 
 **Configure `.env`**:
-Set the base URL where your tracking server will be accessible:
 ```env
-TRACKING_BASE_URL=http://localhost:8000
+TRACKING_BASE_URL=http://your-public-url.com
 ```
-> [!TIP]
-> To track real emails from Gmail/Outlook, the server must be publicly accessible. Use **ngrok** for testing: `ngrok http 8000`. Set `TRACKING_BASE_URL` to your ngrok URL.
 
-### 3. Usage
-
-1.  **Start the Tracker Server**:
-    Run this in a separate terminal window before or after sending your campaign:
-    ```bash
-    python tracker_server.py
-    ```
-2.  **Run the Campaign**:
-    Run `main.py` as usual. It will export a `logs/tracking_map.json` file which the server uses to identify hits.
-3.  **View Results**:
-    Open events are recorded in real-time in:
-    - **Live Console**: Instant logs in the tracker terminal.
-    - **Stats CSV**: `logs/tracking_stats.csv` (Best for Excel/Sheets analysis).
-    - **Event Log**: `logs/tracking_events.log` (Detailed trace).
+### 3. Viewing Results
+Open events are recorded in real-time in:
+- **Stats CSV**: `logs/tracking_stats.csv` (Best for Excel/Sheets analysis).
+- **Event Log**: `logs/tracking_events.log` (Detailed trace).
 
 ---
 

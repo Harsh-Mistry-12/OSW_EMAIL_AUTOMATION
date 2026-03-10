@@ -22,3 +22,5 @@ python-dateutil        # Timestamp helpers
 # ── Tracking (Optional) ────────────────────────────────────────────────────────
 fastapi               # Tracking server framework
 uvicorn[standard]     # ASGI server for FastAPI
+python-multipart      # For file upload support
+
