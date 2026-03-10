@@ -162,11 +162,21 @@ async def run(args: argparse.Namespace) -> None:
         console.print(
             f"\n[bold cyan]Step 2/2:[/] Dispatching {len(recipients)} emails via SMTP …"
         )
+        
+        # Save tracking mapping for the tracker server
+        import json
+        tracking_map = {r.tracking_id: r.to_dict() for r in recipients}
+        tracking_map_path = settings.log_dir / "tracking_map.json"
+        settings.log_dir.mkdir(parents=True, exist_ok=True)
+        with open(tracking_map_path, "w", encoding="utf-8") as f:
+            json.dump(tracking_map, f, indent=4)
+            
         metrics = await dispatch_batch(recipients)
         console.print(
             f"[bold green]✓[/] Dispatch complete — "
             f"Sent: {metrics['sent']}, Failed: {metrics['failed']}"
         )
+        console.print(f"[dim]Tracking mapping saved to {tracking_map_path}[/dim]")
 
     # ── 6. Dashboard ───────────────────────────────────────────────────────────
     if not args.no_dash:

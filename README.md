@@ -1,4 +1,4 @@
-# OSW Email Automation 🚀
+# PostMailer Copilot 🚀
 
 **Enterprise-grade, AI-personalised email outreach system for OpenSource Weekend (OSW)**
 
@@ -16,12 +16,13 @@ Built with Python · Groq LLM · Async SMTP · Rich Terminal Dashboard
 6. [Configuration (.env)](#configuration-env)
 7. [Usage & CLI Reference](#usage--cli-reference)
 8. [Workflow Explained](#workflow-explained)
-9. [Email Template Preview](#email-template-preview)
-10. [Error Handling & Retry Policy](#error-handling--retry-policy)
-11. [Logging & Monitoring](#logging--monitoring)
-12. [Security & Compliance](#security--compliance)
-13. [Running Tests](#running-tests)
-14. [Scaling Beyond 200 Emails](#scaling-beyond-200-emails)
+9. [Email Open Tracking](#email-open-tracking)
+10. [Email Template Preview](#email-template-preview)
+11. [Error Handling & Retry Policy](#error-handling--retry-policy)
+12. [Logging & Monitoring](#logging--monitoring)
+13. [Security & Compliance](#security--compliance)
+14. [Running Tests](#running-tests)
+15. [Scaling Beyond 200 Emails](#scaling-beyond-200-emails)
 
 ---
 
@@ -305,6 +306,48 @@ A `Semaphore` limits concurrent sends; `tenacity` retries transient SMTP errors.
 ### Step 5 — Logging & Dashboard
 Every send attempt writes a JSON record to `logs/send_events_<ts>.jsonl`.  
 The `rich` dashboard displays a metrics panel and last-20-records table.
+
+---
+
+## Email Open Tracking
+
+OSW Email Automation includes a built-in tracking system to see who opens your emails. It uses an invisible tracking pixel and a lightweight web server.
+
+### 1. How it Works
+1.  **Unique IDs**: Every recipient is assigned a unique `tracking_id` when the CSV is loaded.
+2.  **Tracking Pixel**: An invisible `1x1` image tag is injected into the bottom of every email:
+    `<img src="http://your-server.com/t/UNIQUE_ID" ... />`
+3.  **Tracker Server**: A dedicated FastAPI server (`tracker_server.py`) listens for requests. When an image is requested, it logs the recipient's email, name, IP, and timestamp.
+
+### 2. Setup & Configuration
+
+**Install tracking dependencies:**
+```bash
+pip install fastapi "uvicorn[standard]"
+```
+
+**Configure `.env`**:
+Set the base URL where your tracking server will be accessible:
+```env
+TRACKING_BASE_URL=http://localhost:8000
+```
+> [!TIP]
+> To track real emails from Gmail/Outlook, the server must be publicly accessible. Use **ngrok** for testing: `ngrok http 8000`. Set `TRACKING_BASE_URL` to your ngrok URL.
+
+### 3. Usage
+
+1.  **Start the Tracker Server**:
+    Run this in a separate terminal window before or after sending your campaign:
+    ```bash
+    python tracker_server.py
+    ```
+2.  **Run the Campaign**:
+    Run `main.py` as usual. It will export a `logs/tracking_map.json` file which the server uses to identify hits.
+3.  **View Results**:
+    Open events are recorded in real-time in:
+    - **Live Console**: Instant logs in the tracker terminal.
+    - **Stats CSV**: `logs/tracking_stats.csv` (Best for Excel/Sheets analysis).
+    - **Event Log**: `logs/tracking_events.log` (Detailed trace).
 
 ---
 

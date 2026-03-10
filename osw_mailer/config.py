@@ -96,6 +96,11 @@ class Config:
         default_factory=lambda: os.getenv("LOG_LEVEL", "INFO").upper()
     )
 
+    # ── Tracking ────────────────────────────────────────────────────────────
+    tracking_base_url: str = field(
+        default_factory=lambda: os.getenv("TRACKING_BASE_URL", "http://localhost:8000")
+    )
+
     @property
     def batch_limit(self) -> int | None:
         """Return None for 'Max', otherwise the integer limit."""

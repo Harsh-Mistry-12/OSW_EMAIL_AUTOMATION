@@ -19,3 +19,6 @@ tqdm                  # Progress bars
 jinja2                 # HTML template rendering
 email-validator        # RFC-compliant e-mail validation
 python-dateutil        # Timestamp helpers
+# ── Tracking (Optional) ────────────────────────────────────────────────────────
+fastapi               # Tracking server framework
+uvicorn[standard]     # ASGI server for FastAPI

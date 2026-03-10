@@ -13,6 +13,8 @@ from typing import TYPE_CHECKING
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+from .config import settings
+
 if TYPE_CHECKING:
     from .models import Recipient
 
@@ -66,4 +68,12 @@ def render_email(recipient: "Recipient") -> str:
         company_name=recipient.company_name,
         benefit_bullets_html=_bullets_to_html(recipient.llm_benefit_bullets),
     )
-    return html
+
+    # Append tracking pixel
+    tracking_url = f"{settings.tracking_base_url}/t/{recipient.tracking_id}"
+    pixel_tag = (
+        f'\n<img src="{tracking_url}" width="1" height="1" '
+        'style="display:none !important; visibility:hidden; opacity:0;" alt="" />'
+    )
+    
+    return html + pixel_tag

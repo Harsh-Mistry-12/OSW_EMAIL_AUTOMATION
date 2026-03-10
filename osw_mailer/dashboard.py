@@ -97,14 +97,17 @@ def show_dashboard(metrics: dict[str, Any]) -> None:
     # ── Log file paths ─────────────────────────────────────────────────────────
     log_path      = get_log_file_path()
     send_log_path = get_send_log_file_path()
+    from .config import settings
+    tracking_stats_path = settings.log_dir / "tracking_stats.csv"
 
     _console.print(
         Panel(
             "\n".join([
                 f"[bold]Application log:[/]   {log_path or 'N/A'}",
                 f"[bold]Send events log:[/]   {send_log_path or 'N/A'}",
+                f"[bold cyan]Open tracking stats:[/] {tracking_stats_path}",
             ]),
-            title="[bold cyan]Log Files[/]",
+            title="[bold cyan]Log Files & Tracking[/]",
             border_style="dim",
             padding=(1, 3),
         )

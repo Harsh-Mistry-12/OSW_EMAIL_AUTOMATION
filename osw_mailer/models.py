@@ -19,6 +19,7 @@ Expected CSV columns (case-insensitive):
 from __future__ import annotations
 
 import re
+import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -40,6 +41,7 @@ class Recipient:
     company_type: str          # corporate | startup | community | student | individual
     city: str = ""
     context: str = ""
+    tracking_id: str = ""      # Unique ID for open tracking
 
     # Populated by personalizer
     llm_benefit_bullets: str = field(default="", repr=False)
@@ -64,6 +66,7 @@ class Recipient:
             "company_type": self.company_type,
             "city": self.city,
             "context": self.context,
+            "tracking_id": self.tracking_id,
         }
 
 
@@ -169,6 +172,7 @@ def load_recipients(csv_path: str | Path, limit: int | None = None) -> list[Reci
             company_type=company_type,
             city=row.get("city", ""),
             context=row.get("context", ""),
+            tracking_id=uuid.uuid4().hex,
         )
         recipients.append(r)
 
